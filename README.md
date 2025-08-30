@@ -1,103 +1,123 @@
-# Gender-and-Age-Detection   <img alt="GitHub" src="https://img.shields.io/github/license/smahesh29/Gender-and-Age-Detection">
+
+# 👁️ Gender & Age Predictor
+
+[![MIT License](https://img.shields.io/github/license/nikhil-rao-1907/gender-age-predictor?color=yellow)](LICENSE)  
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)  
+![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green?logo=opencv)  
+![Deep Learning](https://img.shields.io/badge/Deep_Learning-CNN-orange)  
+![Status](https://img.shields.io/badge/Status-Active-success)  
+
+---
+
+## 🎯 Objective
+A **Python + Deep Learning project** that detects **gender 👩 / 👨** and **predicts age ranges** of a person from:
+- 🖼️ **Single Image**
+- 🎥 **Live Webcam Feed**
+
+Predicted **Age ranges**:  
+`(0–2), (4–6), (8–12), (15–20), (25–32), (38–43), (48–53), (60–100)`  
+
+---
+
+## 📖 About
+This project uses **pre-trained CNN models** for **age & gender classification**, trained on the **Adience Benchmark Dataset**.  
+
+- 👨‍⚕️ Gender → *Male / Female* (binary classification)  
+- 📅 Age → *8 grouped classes* (softmax classification)  
+- ⚡ Face Detection → OpenCV DNN face detector `.pb` (TensorFlow)  
+- ⚡ Age & Gender → Caffe Models (`.prototxt` + `.caffemodel`)  
+
+💡 **Note:** Exact age prediction is hard due to makeup, lighting, expressions → so classification is more reliable than regression.  
+
+---
+
+## 📂 Dataset
+- **Adience Dataset** → [Download from Kaggle](https://www.kaggle.com/ttungl/adience-benchmark-gender-and-age-classification)  
+- 📸 26,580 face photos, 2,284 subjects, 8 age bins  
+- ✅ Real-world conditions (lighting, angle, noise, expressions)  
+- 🆓 Creative Commons licensed  
+
+---
+
+## 📦 Project Structure
+```
+gender-age-predictor/
+├── detect.py                          # Main detection script
+├── opencv_face_detector.pbtxt         # Face detector config
+├── opencv_face_detector_uint8.pb      # Face detector weights
+├── age_deploy.prototxt                # Age model architecture
+├── age_net.caffemodel                 # Age model weights
+├── gender_deploy.prototxt             # Gender model architecture
+├── gender_net.caffemodel              # Gender model weights
+├── Example/                           # Example output images
+└── README.md                          # Documentation
+```
+
+---
+
+## 📌 Requirements
+Install dependencies:
+```bash
+pip install opencv-python argparse
+```
+
+- 🐍 Python **3.x**
+- 📚 OpenCV **4.x**
+- ⚙️ Argparse for argument parsing  
+
+---
+
+## ▶️ Usage
+
+### 1. Predict age & gender on an **image**
+```bash
+python detect.py --image <image_name>
+```
+🔸 *Ensure the image is in the repo directory*  
+
+### 2. Predict age & gender via **Webcam**
+```bash
+python detect.py
+```
+Press **CTRL + C** to quit.  
+
+---
+
+## 📹 Demo
+[![Watch the demo](https://img.youtube.com/vi/ReeccRD21EU/0.jpg)](https://youtu.be/ReeccRD21EU)  
+▶️ Click to watch full working demo!
+
+---
+
+## 📸 Example Predictions
+
+| Input | Prediction | Output |
+|-------|------------|---------|
+| `girl1.jpg` | Female, 25–32 yrs | ![](Example/Detecting%20age%20and%20gender%20girl1.png) |
+| `girl2.jpg` | Female, 8–12 yrs | ![](Example/Detecting%20age%20and%20gender%20girl2.png) |
+| `kid1.jpg` | Male, 4–6 yrs | ![](Example/Detecting%20age%20and%20gender%20kid1.png) |
+| `kid2.jpg` | Female, 4–6 yrs | ![](Example/Detecting%20age%20and%20gender%20kid2.png) |
+| `man1.jpg` | Male, 38–43 yrs | ![](Example/Detecting%20age%20and%20gender%20man1.png) |
+| `man2.jpg` | Male, 25–32 yrs | ![](Example/Detecting%20age%20and%20gender%20man2.png) |
+| `woman1.jpg` | Female, 38–43 yrs | ![](Example/Detecting%20age%20and%20gender%20woman1.png) |
+
+---
+
+## 📜 License
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 👨‍💻 Author
+- **Nikhil Rao**  
+  🔗 [GitHub](https://github.com/nikhil-rao-1907)  
+
+---
+
+✨ *Predict gender & age from any face image using Deep Learning!* 🚀
 
 
-<h2>Objective :</h2>
-<p>To build a gender and age detector that can approximately guess the gender and age of the person (face) in a picture or through webcam.</p>
 
-<h2>About the Project :</h2>
-<p>In this Python Project, I had used Deep Learning to accurately identify the gender and age of a person from a single image of a face. I used the models trained by <a href="https://talhassner.github.io/home/projects/Adience/Adience-data.html">Tal Hassner and Gil Levi</a>. The predicted gender may be one of ‘Male’ and ‘Female’, and the predicted age may be one of the following ranges- (0 – 2), (4 – 6), (8 – 12), (15 – 20), (25 – 32), (38 – 43), (48 – 53), (60 – 100) (8 nodes in the final softmax layer). It is very difficult to accurately guess an exact age from a single image because of factors like makeup, lighting, obstructions, and facial expressions. And so, I made this a classification problem instead of making it one of regression.</p>
+---
 
-<h2>Dataset :</h2>
-<p>For this python project, I had used the Adience dataset; the dataset is available in the public domain and you can find it <a href="https://www.kaggle.com/ttungl/adience-benchmark-gender-and-age-classification">here</a>. This dataset serves as a benchmark for face photos and is inclusive of various real-world imaging conditions like noise, lighting, pose, and appearance. The images have been collected from Flickr albums and distributed under the Creative Commons (CC) license. It has a total of 26,580 photos of 2,284 subjects in eight age ranges (as mentioned above) and is about 1GB in size. The models I used had been trained on this dataset.</p>
-
-<h2>Additional Python Libraries Required :</h2>
-<ul>
-  <li>OpenCV</li>
-  
-       pip install opencv-python
-</ul>
-<ul>
- <li>argparse</li>
-  
-       pip install argparse
-</ul>
-
-<h2>The contents of this Project :</h2>
-<ul>
-  <li>opencv_face_detector.pbtxt</li>
-  <li>opencv_face_detector_uint8.pb</li>
-  <li>age_deploy.prototxt</li>
-  <li>age_net.caffemodel</li>
-  <li>gender_deploy.prototxt</li>
-  <li>gender_net.caffemodel</li>
-  <li>a few pictures to try the project on</li>
-  <li>detect.py</li>
- </ul>
- <p>For face detection, we have a .pb file- this is a protobuf file (protocol buffer); it holds the graph definition and the trained weights of the model. We can use this to run the trained model. And while a .pb file holds the protobuf in binary format, one with the .pbtxt extension holds it in text format. These are TensorFlow files. For age and gender, the .prototxt files describe the network configuration and the .caffemodel file defines the internal states of the parameters of the layers.</p>
- 
- <h2>Usage :</h2>
- <ul>
-  <li>Download my Repository</li>
-  <li>Open your Command Prompt or Terminal and change directory to the folder where all the files are present.</li>
-  <li><b>Detecting Gender and Age of face in Image</b> Use Command :</li>
-  
-      python detect.py --image <image_name>
-</ul>
-  <p><b>Note: </b>The Image should be present in same folder where all the files are present</p> 
-<ul>
-  <li><b>Detecting Gender and Age of face through webcam</b> Use Command :</li>
-  
-      python detect.py
-</ul>
-<ul>
-  <li>Press <b>Ctrl + C</b> to stop the program execution.</li>
-</ul>
-
-# Working:
-[![Watch the video](https://img.youtube.com/vi/ReeccRD21EU/0.jpg)](https://youtu.be/ReeccRD21EU)
-
-<h2>Examples :</h2>
-<p><b>NOTE:- I downloaded the images from Google,if you have any query or problem i can remove them, i just used it for Educational purpose.</b></p>
-
-    >python detect.py --image girl1.jpg
-    Gender: Female
-    Age: 25-32 years
-    
-<img src="Example/Detecting age and gender girl1.png">
-
-    >python detect.py --image girl2.jpg
-    Gender: Female
-    Age: 8-12 years
-    
-<img src="Example/Detecting age and gender girl2.png">
-
-    >python detect.py --image kid1.jpg
-    Gender: Male
-    Age: 4-6 years    
-    
-<img src="Example/Detecting age and gender kid1.png">
-
-    >python detect.py --image kid2.jpg
-    Gender: Female
-    Age: 4-6 years  
-    
-<img src="Example/Detecting age and gender kid2.png">
-
-    >python detect.py --image man1.jpg
-    Gender: Male
-    Age: 38-43 years
-    
-<img src="Example/Detecting age and gender man1.png">
-
-    >python detect.py --image man2.jpg
-    Gender: Male
-    Age: 25-32 years
-    
-<img src="Example/Detecting age and gender man2.png">
-
-    >python detect.py --image woman1.jpg
-    Gender: Female
-    Age: 38-43 years
-    
-<img src="Example/Detecting age and gender woman1.png">
-              
+👉 Do you want me to also design that **System Flow Diagram (architecture: webcam/image → detector → CNN model → output)** in Mermaid/PlantUML code so you can add to README just like we did for ER diagrams?
